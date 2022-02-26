@@ -1,0 +1,48 @@
+﻿@model ASM.Models.Customer
+@{
+    ViewData["Title"] = "SignUp";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title> Responsive Registration Form | CodingLab </title>
+    <link rel="stylesheet" href="~/css/SignUp.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <div class="title">Registration</div>
+        <div class="content">
+            <form asp-controller="Sign" asp-action="SignUp">
+                <div class="user-details">
+
+                    <div class="input-box">
+                        <label class="details" asp-for="Email"></label>
+                        <input asp-for="Email" placeholder="Enter your Email" required>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <label class="details" asp-for="PassWord"></label>
+                        <input type="password" asp-for="PassWord" placeholder="Enter your Password" required>
+                        <span asp-validation-for="PassWord" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="button">
+                        <input type="submit" value="SignUp">
+                    </div>
+                </div>
+
+                <p style="color:red">@ViewBag.kt</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

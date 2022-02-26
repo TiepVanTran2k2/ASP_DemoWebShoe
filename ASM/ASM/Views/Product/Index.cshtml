@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<ASM.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutProduct.cshtml";
+}
+
+@section Css {
+    <link rel="stylesheet" href="~/css/Product.css" />
+}
+<h1 style="margin-left:10px; font-style:initial; font-weight:bold">Home</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.Status == true)
+        {
+    <div class="col-sm-4 col-lg-4 col-md-4">
+       
+        <div id="card">
+            <a asp-controller="Product" asp-action="DetailProduct" asp-route-id="@item.ProductId" style="text-decoration: none" target="_blank">
+                <div id="card_heart">
+                    <i class='bx bx-heart'></i>
+                </div>
+                <div id="card_cart">
+                    <i class='bx bx-cart'></i>
+                </div>
+                <div id="card_img">
+                    <img src="~/product_imgs/@item.Images" alt="">
+                </div>
+                <div id="card_title" style="color: green;">
+                    @item.Name
+                </div>
+                <div id="card_price">
+                    @item.Price$
+                </div>
+                <div id="card_size">
+                    <h6>Size:</h6>
+                    <span>38</span>
+                    <span>39</span>
+                    <span>40</span>
+                    <span>41</span>
+                </div>
+                <div id="card_color">
+                    <h6>Color:</h6>
+                    <span class="card_color-red"></span>
+                    <span class="card_color-green"></span>
+                    <span class="card_color-black"></span>
+                </div>
+            </a>
+            <div id="card_action">
+                @if (item.Quantity == 0)
+                {
+                        <p style="color:red;font-weight:bold">Out of stock</p>
+                }
+                else
+                {
+                    @if (ViewBag.Email != null)
+                    {
+                        <a asp-route="addcart"
+                           asp-route-productid="@item.ProductId" target="_blank">Add Cart</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Product"
+                           asp-action="Login">Add Cart</a>
+                    }
+                }
+
+                @*<a type="submit" value="Add cart" asp-controller="Products" asp-action="Index" />*@
+            </div>
+        </div>
+            </div>
+        }
+    }
+</div>
+

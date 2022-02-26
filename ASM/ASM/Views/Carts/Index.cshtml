@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ASM.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+<h2>Manager Order</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SumPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            @if (item.Status == true)
+            {
+                <td>
+                    Checked<img src="~/icon/Check Circle_48px.png" style="height:20px;width:20px" />
+                </td>
+            }
+            @if (item.Status == false)
+            {
+                <td>
+                    Not Checked<img src="~/icon/manual_50px.png" style="height:20px;width:20px" />
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.SumPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Email)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.CartId" class="btn btn-dark">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@model ASM.Models.CartDetail
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CartDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantily)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantily)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cart)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cart.CartId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Images)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Stt">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

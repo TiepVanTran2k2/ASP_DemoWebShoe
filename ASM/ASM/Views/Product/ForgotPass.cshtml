@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "ForgotPass";
+    Layout = "~/Views/Shared/_LayoutCustomerDetail.cshtml";
+}
+
+<h2>ForgotPass</h2>
+@section Css{
+    <link href="~/css/CustomerDetail.css" rel="stylesheet" />
+}
+@model ASM.Models.Customer
+<form method="post" asp-action="ForgotPass" style="height: 150px;width:600px;margin-left:450px" class="dl-horizontal">
+    <input type="email" asp-for="Email" name="email" />
+    <input type="submit" class="btn btn-success" value="Get password" />
+</form>
+

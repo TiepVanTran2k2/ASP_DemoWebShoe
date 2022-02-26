@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ASM.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManagerProduct.cshtml";
+}
+@section Css {
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+}
+<h2 style="margin-left:15px;font-weight:bold">Manager Product</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-class" style="background-color: #00BFFF; margin-left: 15px; font-weight: bold; color: black">Create new product</a>
+    <a asp-controller="Suppliers" asp-action="Index" class="btn btn-class" style="background-color: #00BFFF; margin-left: 5px; font-weight: bold; color: black">Manager Suppliers</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Introduce)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Images)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td style="width:200px">
+                    @Html.DisplayFor(modelItem => item.Introduce)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <img src="~/product_imgs/@item.Images" style="height:100px;width:150px"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supplier.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProductId" class="btn btn-success">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-success">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProductId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

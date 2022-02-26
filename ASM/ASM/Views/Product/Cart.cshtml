@@ -1,0 +1,69 @@
+﻿@model List<ASM.Models.ItemCart>
+
+<h2>MY CART</h2>
+<a class="btn btn-success" asp-controller="Product" asp-action="History" target="_parent">History</a>
+@if (Model.Count > 0)
+{
+    decimal total = 0;
+    int stt = 1;
+    //<a asp-controller="Product" asp-action="Index" class="btn btn-success">Back to home</a>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th style="margin-left: 5px">Total</th>
+            <th></th>
+        </tr>
+        @foreach (var cartitem in Model)
+        {
+            var thanhtien = cartitem.quantity * cartitem.product.Price;
+            total += thanhtien;
+
+            <tr>
+                <td>@(stt++)</td>
+                <td>@cartitem.product.Name</td>
+                <td>@(cartitem.product.Price.ToString("n0"))</td>
+                @*<td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductId}")" /></td>
+                    <td>@(thanhtien.ToString("n0"))</td>
+                    <td>
+                        <a class="btn btn-success updatecartitem"
+                                data-productid="@cartitem.product.ProductId">
+                            Cập nhật
+                        </a>
+                    </td>*@
+                <td>
+                    <form action="@Url.Action("UpdateCart")" method="post">
+                        <input type="hidden" name="SanPhamID" value="@cartitem.product.ProductId" />
+                        <input type="number" min="1" step="1" max="@cartitem.product.Quantity" name="soluongmoi" value="@cartitem.quantity" />
+                        <input type="submit" class="btn btn-primary btn-sm" value="Update" />
+                        <a asp-route="removecart" asp-route-productid="@cartitem.product.ProductId"
+                           class="btn btn-danger">Remove</a>
+                    </form>
+                </td>
+
+                <td>@(thanhtien.ToString("n0"))</td>
+
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-right" style="font-weight:bold">Sum price:</td>
+            <td>@(total.ToString("n0"))</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <form action="@Url.Action("Pay")" method="post">
+        <input type="hidden" name="Sumprice" value="@(total)" />
+        <label>Name Recipient</label><input class="form-control" type="text" name="name" />
+        <label>My phone</label><input class="form-control" type="text" name="phone" />
+        <label>Delivery address</label><input class="form-control" type="text" name="address" />
+        <input type="submit" class="btn btn-success" value="Payment"/>
+    </form>
+}
+else
+{
+    <p class="alert alert-danger">Cart have not product</p>
+}
+

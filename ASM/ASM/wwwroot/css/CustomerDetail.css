@@ -1,0 +1,13 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.dl-horizontal {
+    margin: 8%;
+    padding: 4rem 1rem 4rem 1rem;
+    box-shadow: 0 0 5px 5px rgba(0,0,0, .05);
+}
+.btn-default{
+    background-color:darkgrey
+}

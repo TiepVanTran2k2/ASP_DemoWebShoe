@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "DetailProduct";
+    Layout = "~/Views/Shared/_LayoutManagerProduct.cshtml";
+}
+
+@model ASM.Models.Product
+
+<div>
+    <h4>Detail</h4>
+    <img src="~/product_imgs/@Model.Images" style="height:400px;width:400px" />
+    <dl class="dl-horizontal" style="margin-left:420px;margin-top:-350px;width:500px">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Introduce)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Introduce)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Images)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Images)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Name)
+        </dd>
+    </dl>
+</div>
+
+

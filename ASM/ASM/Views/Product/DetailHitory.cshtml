@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "DetailHitory";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+
+@model IEnumerable<ASM.Models.CartDetail>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cart</h4>
+    <hr />
+    <form method="post" asp-controller="Product" asp-action="UpdateInfo">
+        <dl class="dl-horizontal" style="height:470px;width:350px; border:1px solid black;margin-left:5px">
+            <dt>
+                Day Create:
+            </dt>
+            <dd>
+                @ViewBag.Day
+            </dd>
+            <dt>
+                Status:
+            </dt>
+            <dd>
+                @ViewBag.Status
+            </dd>
+            <dt>
+                Sum Price:
+            </dt>
+            <dd>
+                @ViewBag.SumPrice
+            </dd>
+            <dt>
+                Customer`s Name:
+            </dt>
+            <dd>
+                @ViewBag.Customer
+            </dd>
+            <dt>
+                Recipient`s Name:
+            </dt>
+            <dd>
+                <input class="form-control" name="recipient" value="@ViewBag.Recipient" />
+            </dd>
+            <dt>
+                Phone:
+            </dt>
+            <dd>
+                <input class="form-control" name="phone" value="@ViewBag.Phone" />
+            </dd>
+            <dt>
+                Delivery address:
+            </dt>
+            <dd>
+                <input class="form-control" name="address" value="@ViewBag.address" />
+            </dd>
+        </dl>
+        <input type="hidden" value="@ViewBag.id" name="id" />
+        @if (ViewBag.Status == false)
+        {
+            <input type="submit" class="btn btn-success" value="Update Info" />
+        }
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Images)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantily)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            int quantity = (int)item.Quantily + (int)item.Product.Quantity;
+            <tr>
+                <td>
+                    @item.Product.Name
+                </td>
+                <td>
+                    <img src="~/product_imgs/@item.Product.Images" style="height:100px; width:150px" />
+                </td>
+                <td>
+                    @item.Product.Price
+                </td>
+                <td>
+                    @if (ViewBag.Status == false)
+                    {
+                    <form method="post" asp-controller="Product" asp-action="UpdateProductOrder">
+                        <input type="hidden" name="id" value="@item.Stt" />
+                        <input type="hidden" name="idProduct" value="@item.Product.ProductId" />
+                        <input type="number" name="quantity" class="form-control" min="1" step="1" max="@quantity" value="@item.Quantily" />
+                        <input type="submit" class="btn btn-success" value="Update" />
+                    </form>
+                    <form method="post" asp-controller="Product" asp-action="RemoveProductOrder">
+                        <input type="hidden" name="id" value="@item.Stt" />
+                        <input type="hidden" name="quantity" value="@item.Quantily" />
+                        <input type="hidden" name="idProduct" value="@item.Product.ProductId" />
+                        <input type="submit" class="btn btn-danger" value="Remove" />
+                    </form>
+                    }
+                else
+                {
+                    @item.Quantily
+                }
+
+                </td>
+                <td>
+                    @item.Total
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Index" class="btn btn-danger">Back to List</a>
+</div>
+
+
